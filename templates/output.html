@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link href="{{ url_for('static', filename='githubVisualiser.css') }}" type = "text/css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <script>
+            window.onload = function() {
+              window.commitsByRepo = new Chart(document.getElementById("commitsByRepo"), {
+                  type: 'bar',
+                  data: {
+                    labels: {{repoNames|safe}},
+                    datasets: [
+                      {
+                        backgroundColor: {{commitColours|safe}},
+                        data: {{commitsByRepo}},
+                      }
+                    ]
+                  },
+                  options: {
+                    legend: { display: false },
+                    title: {
+                      display: false,
+                      text: 'Total commits by repository'
+                    },
+                    scales: {
+                    	yAxis: {
+                    		ticks: {
+                    			beginAtZero: true
+                    		}
+                    	}
+                    }
+                  }
+              });
+
+              window.contentsByRepo = new Chart(document.getElementById("contentsByRepo"), {
+                  type: 'horizontalBar',
+                  data: {
+                    labels: {{repoNames|safe}},
+                    datasets: [
+                      {
+                        backgroundColor: {{contentColours|safe}},
+                        data: {{contentsByRepo}},
+                      }
+                    ]
+                  },
+                  options: {
+                    legend: { display: false },
+                    title: {
+                      display: false,
+                      text: 'Total contents by repository'
+                    },
+                    scales: {
+                    	yAxis: {
+                    		ticks: {
+                    			beginAtZero: true
+                    		}
+                    	}
+                    }
+                  }
+              });
+
+            window.languages = new Chart(document.getElementById("languages"), {
+                  type: 'doughnut',
+                  data: {
+                    labels: {{languageNames|safe}},
+                    datasets: [
+                      {
+                      	borderWidth: 0,
+                      	hoverBackgroundColor : '#f58282',
+                        backgroundColor: {{languageColours|safe}},
+                        data: {{languageValues}},
+                      }
+                    ]
+                  },
+                  options: {
+                    legend: { display: false },
+                    title: {
+                      display: false,
+                      text: 'Languages by share of all repositories'
+                    },
+                  }
+              });
+            }
+        </script>
+    </head>
+    <body>
+    	<h1> {{userName}}'s Github results! </h1>
+    	<div>
+    		<h2> Total commits by repository </h2>
+	    	<canvas id="commitsByRepo"></canvas> <br>
+	    </div>
+	    <div>
+	    	<h2> Total contents by repository </h2>
+	    	<canvas id="contentsByRepo"></canvas> <br>
+	    </div>
+	    <div>
+	    	<h2> Languages by share of code base </h2>
+	    	<canvas class = "pie" id="languages"></canvas>
+	    	<p class = "legend"> 
+	    		{% autoescape false %}
+				    {{languageLegend}}
+				{% endautoescape %} 
+			</p>
+    	</div>
+    	<br> <h2> Table data for {{userName}}! </h2> 
+        <table class = "outputTable">
+		    <thead>
+		        <tr>
+		            <th>Name</th>
+		            <th>Value</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr>
+		            <td>Total number of {{public}} repos</td>
+		            <td>{{ totalRepos }}</td>
+		        </tr>
+		        <tr>
+		            <td>Total number of {{public}} commits</td>
+		            <td>{{ totalCommits }}</td>
+		        </tr>
+		        <tr>
+		            <td>Total number of {{public}} content files</td>
+		            <td>{{ totalContents }}</td>
+		        </tr>
+		        <tr>
+		        	<th  rowspan={{numberOfLanguages}}> Languages used </th>
+			        {% autoescape false %}
+			        	{{languageTableData}}
+					{% endautoescape %} 
+				<tr>
+		            <td> Average number of {{public}} commits</td>
+		            <td>{{ averageCommits }}</td>
+		        </tr>
+		        <tr>
+		            <td> Average number of {{public}} content files</td>
+		            <td>{{ averageContent }}</td>
+		        </tr>
+		    </tbody>
+		</table>
+    </body>
+</html>

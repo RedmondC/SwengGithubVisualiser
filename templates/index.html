@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link href="{{ url_for('static', filename='githubVisualiser.css') }}" type = "text/css" rel="stylesheet">
+        <script>
+            function loading() {
+                document.getElementById("loading").style.display = "block";
+                document.getElementById("content").style.display = "none";
+            }
+        </script>
+    </head>
+    <body>
+        <div id = "content">
+            <h1 id="test"> GitHub Data Visualisation! </h1> 
+            <form action="{{ url_for('userDataMethod') }}", method = "POST">
+                <label for="username"> Find statistics by username <br> (much lower rate limit, api key is reccomended): </label> <br>
+                <input name ="username" placeholder="Enter username here"  type="text"/> <br>
+                <input class = "button" type = "submit" onclick="loading()"/> <br>
+            </form>
+
+            <form action="{{ url_for('keyDataMethod') }}", method = "POST">
+                <label for="key"> Find statistics by api key: </label> <br>
+                <input name ="key" placeholder="Enter api key here"  type="text"/> <br>
+                <input class = "button" type = "submit" onclick="loading()" />
+            </form>
+        </div>
+        <div id = "loading"></div>
+    </body>
+</html>

@@ -1,0 +1,111 @@
+body{
+	text-align: center;
+	background-color: black;
+}
+
+label{
+	font-size: 1.75em;
+	color: red;
+	margin-bottom: 0.25em;
+}
+
+input, input:focus, input::placeholder, 
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus,
+textarea:-webkit-autofill, textarea:-webkit-autofill:hover, textarea:-webkit-autofill:focus,
+select:-webkit-autofill, select:-webkit-autofill:hover, select:-webkit-autofill:focus {
+	color : red;
+	border-width: 3px;
+	border-color: red; 
+	background-color: #111111 !important;
+	-webkit-text-fill-color: red;
+	-webkit-box-shadow: 0 0 0px 1000px black inset;
+	box-shadow: 0 0 0px 1000px black inset;
+	border-radius: 5px;
+	padding:0.5em;
+	outline: none;
+}
+
+#loading{
+	display: none;
+	background-image: url('https://i.gifer.com/8Etj.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+	height:30vh;
+	width:30vh;
+	margin-left: calc(50vw - 15vh);
+	margin-top: calc(50vh - 15vh);
+	padding:none;
+	margin:none;
+	vertical-align: middle
+}
+
+#test{
+	font-size: 2.5em;
+}
+
+.button, .button:focus{
+	margin: 1em;
+	width: 10em;
+	height:3em;
+	border-color:  red;
+	color: red;
+	background-color: #111111;
+	border-radius: 8px;
+	outline:none;
+}
+
+
+
+/* output css */
+
+*{
+	color:red;
+}
+
+canvas{
+	height: 80vh !important;
+	width: 90vw !important;
+	margin-left: 5vw !important;
+}
+
+.pie{
+	width: 60% !important;
+	display: inline-block !important;
+}
+
+.legend{
+	width: 30%;
+	display: inline-block;
+	vertical-align: top;
+	text-align: left;
+}
+
+.outputTable {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    display: inline-block;
+    color: black;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.25);
+}
+
+.outputTable thead tr th{
+    background-color: #ff0000;
+    color: #000000 !important;
+}
+
+.outputTable th,
+.outputTable td {
+    padding: 12px 15px;
+    font-size: 18px;
+}
+
+.outputTable tbody tr:nth-of-type(even) td{
+    background-color: #ff0000;
+    color:black !important;
+}
+
+.outputTable tbody tr:last-of-type {
+    border-bottom: 5px solid #ff0000;
+}
